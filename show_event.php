@@ -60,9 +60,17 @@ include "includes/header.php";
 ?>
 
 <?php
-echo $lang["category"].": \n";
-$cate = mysql_result(mysql_query("select name from ".$table_prefix."categories where category_id = ".$category_id),0,0);
-echo "<strong>".$cate."</strong><br />\n";
+$cdescs = '';
+
+do {
+   $cate = mysql_result(mysql_query("select name from ".$table_prefix."categories where category_id = ".$category_id),0,0);
+   $cdesc = mysql_result(mysql_query("select description from ".$table_prefix."categories where category_id = ".$category_id),0,0);
+   $cdescs = "<strong>".$cate."</strong> - " . $cdesc . "\n<blockquote>" . $cdescs . "</blockquote>";
+   $category_id = mysql_result(mysql_query("select sub_of from ".$table_prefix."categories where category_id = ".$category_id),0,0);
+} while ($category_id != "1");
+
+echo $cdescs."\n";
+
 if ($venue_id > 1) {
 	$q = "select url, company, description, address1, address2, city, state, zip, phone, fax  FROM ".$table_prefix."links where link_id = ".$venue_id;
 	$lq = mysql_query($q);
@@ -100,7 +108,7 @@ if ($contact_id > 1) {
 	echo "<br />\n";
 }
 if ($nicedate[1]) {
-	echo $lang["dates"].":<ul>\n";
+	echo "<strong>" . $lang["dates"] . "</strong>:<ul>\n";
 	while (list($k,$v) = each($nicedate)) {
 		echo "<strong><li>".$v."</li></strong>\n";
 	}
