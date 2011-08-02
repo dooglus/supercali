@@ -631,7 +631,7 @@ if ($_POST["date_add"]) {
 
 <div id="timelayer" STYLE="position:absolute;visibility:hidden;background-color:white;layer-background-color:white;top:0px;z-index: 1;">
 <form id="time" name="time">
-	<select id="hour" size="18" onChange="testpopup5pick(this.options[this.selectedIndex].value);">
+	<select id="hour" size="18" onClick="testpopup5pick(this.options[this.selectedIndex].value);">
 		<option value="12:00 am" class="midnight">Midnight</option>
 		<option value="01:00 am" class="evening">01:00 am</option>
 		<option value="02:00 am" class="evening">02:00 am</option>
