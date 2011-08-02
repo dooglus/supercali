@@ -538,7 +538,7 @@ if ($_POST["date_add"]) {
 		
 	</tr>
 	<tr>
-		<td colspan="4"><?php echo $lang["recurring"];?> <input type="text" name="recurring" size="3"> X <select name="interval"><option value="1">1</option><option value="7">7</option></select> <?php echo $lang["days"];?></td>
+		<td colspan="4"><?php echo $lang["recurring"];?> <input type="text" name="recurring" size="3"> X <select name="interval"><option value="1">1</option><option value="7" selected="selected">7</option></select> <?php echo $lang["days"];?></td>
 	</tr>
 </table>
 <p><input type="submit" name="mode" id="mode" value="<?php echo $lang["add_edit_dates"];?>"></p>
