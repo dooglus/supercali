@@ -637,7 +637,8 @@ if ($_POST["date_add"]) {
 		</td>
 	</tr>
 </table>
-<p><input type="submit" name="mode" id="mode" value="<?php echo $lang["add_edit_dates"];?>"></p>
+<p><input type="submit" name="mode" id="mode" value="<?php echo $lang["add_edit_dates"];?>">
+   <input type="submit" name="mode" id="mode" value="<?php echo $lang["update_event"];?>"></p>
 <p><?php echo $lang["description"];?>:<br />
 <?php if ($fck_editor_path) {
 	include($fck_editor_path."fckeditor.php") ;
@@ -648,11 +649,10 @@ if ($_POST["date_add"]) {
 	$oFCKeditor->ToolbarSet	= $fck_editor_toolbar;
 	$oFCKeditor->Create() ;
 } else {
-	echo "<textarea cols=\"60\" rows=\"10\" name=\"description\" id=\"description\">".$_POST["description"]."</textarea>\n";
+	echo "<textarea cols=\"60\" rows=\"6\" name=\"description\" id=\"description\">".$_POST["description"]."</textarea>\n";
 }
 ?>
 </p>
-<p><input type="submit" name="mode" id="mode" value="<?php echo $lang["update_event"];?>"></p>
 </form>
 
 <div id="timelayer" STYLE="position:absolute;visibility:hidden;background-color:white;layer-background-color:white;top:0px;z-index: 1;">
