@@ -159,7 +159,7 @@ function showGrid($date) {
 				if ($ed[$start_event[$r][$k]]==true) {
 					echo "&nbsp;&nbsp;<span class=\"edit\">";
 					if (($ap[$start_event[$r][$k]]==true) && (($status[$start_event[$r][$k]] == 2) || ($status[$start_event[$r][$k]] == 3))) echo "[<a href=\"admin_actions.php?id=".$start_event[$r][$k]."&o=".$o."&c=".$c."&m=".$m."&a=".$a."&y=".$y."&w=".$w."&mode=".approve."\">".$lang["approve"]."</a>]&nbsp;&nbsp;";
-					echo "[<a href=\"edit_event.php?id=".$start_event[$r][$k]."&o=".$o."&c=".$c."&m=".$m."&a=".$a."&y=".$y."&w=".$w."\" onClick=\"openPic('edit_event.php?id=".$start_event[$r][$k]."&size=small','pop','650','600'); window.newWindow.focus(); return false\">".$lang["edit"]."</a>]&nbsp;&nbsp;[<a href=\"delete_event.php?id=".$start_event[$r][$k]."&o=".$o."&c=".$c."&m=".$m."&a=".$a."&y=".$y."&w=".$w."\">".$lang["delete"]."</a>]</span>\n";
+					echo "[<a href=\"edit_event.php?id=".$start_event[$r][$k]."&o=".$o."&c=".$c."&m=".$m."&a=".$a."&y=".$y."&w=".$w."\" onClick=\"openPic('edit_event.php?id=".$start_event[$r][$k]."&size=small','pop','650','700'); window.newWindow.focus(); return false\">".$lang["edit"]."</a>]&nbsp;&nbsp;[<a href=\"delete_event.php?id=".$start_event[$r][$k]."&o=".$o."&c=".$c."&m=".$m."&a=".$a."&y=".$y."&w=".$w."\">".$lang["delete"]."</a>]</span>\n";
 				}
 				echo "</div></div></div>\n";
 			}
