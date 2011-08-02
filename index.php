@@ -78,7 +78,7 @@ function grabDates($start,$end,$category_array) {
 			$mycolor = $row[13];
 			while ($mycolor == '') {
 			   $cat_id = mysql_result(mysql_query("select sub_of from ".$table_prefix."categories where category_id = ".$cat_id),0,0);
-			   if ($cat_id == "1") break;
+			   if ($cat_id == "0") break;
 			   $mycolor = mysql_result(mysql_query("select color from ".$table_prefix."categories where category_id = ".$cat_id),0,0);
 			}
 
@@ -86,7 +86,7 @@ function grabDates($start,$end,$category_array) {
 			$mybg = $row[14];
 			while ($mybg == '') {
 			   $cat_id = mysql_result(mysql_query("select sub_of from ".$table_prefix."categories where category_id = ".$cat_id),0,0);
-			   if ($cat_id == "1") break;
+			   if ($cat_id == "0") break;
 			   $mybg = mysql_result(mysql_query("select background from ".$table_prefix."categories where category_id = ".$cat_id),0,0);
 			}
 
