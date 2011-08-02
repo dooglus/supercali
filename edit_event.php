@@ -229,7 +229,7 @@ if (!$superview) {
 		$_POST["group"] = $row["group_id"];
 		if (($row["status_id"] == 2) || ($row["status_id"] == 3)) $_POST["propose"] = "propose";
 		else $_POST["propose"] = "post";
-		$q = "SELECT * from ".$table_prefix."dates where event_id =".$_REQUEST["id"];
+		$q = "SELECT * from ".$table_prefix."dates where event_id =".$_REQUEST["id"]." ORDER BY date";
 		$query = mysql_query($q);
 		if (!$query) $msg .= "Database Error : ".$q;
 		else {
