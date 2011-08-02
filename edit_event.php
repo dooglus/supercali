@@ -622,10 +622,10 @@ if ($_POST["date_add"]) {
 		<td>
 			<input type="text" name="date_add" id="date_add" size="10"> <a href="#" onclick="cal.select(document.event.date_add,this.name,'MM/dd/yyyy'); return false;" NAME="anchor_date_add" ID="anchor_date_add"><img src="images/calendar.png" border="add" /></a></td>
 		<td><input type="radio" onClick="null_out(this,'add');" name="all_day_add" id="all_day_add" value="all" /> / <input type="radio" onClick="null_out(this,'add');" name="all_day_add" id="all_day_add" value="tba" /> / <input type="radio" onClick="null_out(this,'add');" name="all_day_add" id="all_day_add" value="" checked /></td>
-<td><input type="text" name="start_time_add" id="start_time_add" size="10"> <a href="#" onclick="test5popupactivate(document.event.start_time_add,this.name);return false;" NAME="anchor_time_start_add" ID="anchor_time_start_add""><img src="images/time.png" border="add" /></a>
+<td><input type="text" name="start_time_add" id="start_time_add" size="10"> <a href="#" onclick="test5popupactivate(document.event.start_time_add,this.name);return false;" NAME="anchor_time_start_add" ID="anchor_time_start_add"><img src="images/time.png" border="add" /></a>
 			
 		</td>
-		<td><input type="text" name="end_time_add" id="end_time_add" size="10"> <a href="#" onclick="test5popupactivate(document.event.end_time_add,this.name);return false;" NAME="anchor_time_end_add" ID="anchor_time_end_add""><img src="images/time.png" border="add" /></a>
+		<td><input type="text" name="end_time_add" id="end_time_add" size="10"> <a href="#" onclick="test5popupactivate(document.event.end_time_add,this.name);return false;" NAME="anchor_time_end_add" ID="anchor_time_end_add"><img src="images/time.png" border="add" /></a>
 		</td>
 		
 	</tr>
