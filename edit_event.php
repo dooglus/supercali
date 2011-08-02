@@ -314,8 +314,8 @@ if (!$superview) {
 			$query = mysql_query($q);
 			if (!$query) $msg .= "Database Error : ".$q;
 			$j = 0;
-			while ($_POST["date_".$j]) {
-				if (!$_POST["delete_".$j]) {
+			while (array_key_exists("date_".$j, $_POST)) {
+				if (!$_POST["delete_".$j] && $_POST["date_".$j]) {
 					if ($_POST["all_day_".$j] == "all") {
 						$_POST["start_time_".$j] = "12:00 am";
 						$_POST["end_time_".$j] = "11:59 pm";
