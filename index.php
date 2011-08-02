@@ -73,8 +73,25 @@ function grabDates($start,$end,$category_array) {
 			if ($row[7] && $row[8] && $row[9]) $state[$row[2]]=$row[9];
 			$cat[$row[2]]=$row[10];
 			$usr[$row[2]]=$row[11];
-			$color[$row[2]]=$row[13];
-			$background[$row[2]]=$row[14];
+
+			$cat_id = $row[10];
+			$mycolor = $row[13];
+			while ($mycolor == '') {
+			   $cat_id = mysql_result(mysql_query("select sub_of from ".$table_prefix."categories where category_id = ".$cat_id),0,0);
+			   if ($cat_id == "1") break;
+			   $mycolor = mysql_result(mysql_query("select color from ".$table_prefix."categories where category_id = ".$cat_id),0,0);
+			}
+
+			$cat_id = $row[10];
+			$mybg = $row[14];
+			while ($mybg == '') {
+			   $cat_id = mysql_result(mysql_query("select sub_of from ".$table_prefix."categories where category_id = ".$cat_id),0,0);
+			   if ($cat_id == "1") break;
+			   $mybg = mysql_result(mysql_query("select background from ".$table_prefix."categories where category_id = ".$cat_id),0,0);
+			}
+
+			$color[$row[2]]=$mycolor;
+			$background[$row[2]]=$mybg;
 			$status[$row[2]]=$row[15];
 		}
 	}
