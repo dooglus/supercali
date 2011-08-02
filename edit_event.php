@@ -413,6 +413,28 @@ if (!$superview) {
 					}
 				}
 			}
+
+                        $shiftdays = $_POST["shiftdays"];
+                        if (!$shiftdays) $shiftdays = 0;
+
+                        $shifthours = $_POST["shifthours"];
+                        if (!$shifthours) $shifthours = 0;
+
+                        $shiftmins = $_POST["shiftmins"];
+                        if (!$shiftmins) $shiftmins = 0;
+
+                        mysql_query("UPDATE " . $table_prefix . "dates" .
+                                    " SET" .
+                                    " date = date" .
+                                    " + INTERVAL " . $shiftdays . " DAY" .
+                                    " + INTERVAL " . $shifthours. " HOUR" .
+                                    " + INTERVAL " . $shiftmins . " MINUTE," .
+                                    " end_date = end_date" .
+                                    " + INTERVAL " . $shiftdays . " DAY" .
+                                    " + INTERVAL " . $shifthours. " HOUR" .
+                                    " + INTERVAL " . $shiftmins . " MINUTE" .
+                                    " WHERE event_id = " . $_REQUEST["id"]);
+
 			if ($_POST["notify"]) {
 				include "includes/notify.php";
 				notify_group($_POST["id"]);
@@ -608,7 +630,11 @@ if ($_POST["date_add"]) {
 		
 	</tr>
 	<tr>
-		<td colspan="4"><?php echo $lang["recurring"];?> <input type="text" name="recurring" size="3"> X <select name="interval"><option value="1">1</option><option value="7" selected="selected">7</option></select> <?php echo $lang["days"];?></td>
+		<td colspan="3"><?php echo $lang["recurring"];?> <input type="text" name="recurring" size="3"> X <select name="interval"><option value="1">1</option><option value="7" selected="selected">7</option></select> <?php echo $lang["days"];?></td>
+		<td colspan="2">shift
+			<input type="text" name="shiftdays" size="2"> days,
+			<input type="text" name="shifthours" size="2">:<input type="text" name="shiftmins" size="2"> hh:mm
+		</td>
 	</tr>
 </table>
 <p><input type="submit" name="mode" id="mode" value="<?php echo $lang["add_edit_dates"];?>"></p>
