@@ -54,8 +54,8 @@ if ($_REQUEST["size"] == "small") {
 
 ?>
 </div>
-<h4><?php echo $calendar_title; ?></h4>
-<h1><?php echo $page_title; ?></h1>
+<br/><h1><?php echo $calendar_title; ?></h1>
+<!-- <h1><?php echo $page_title; ?></h1> -->
 </div>
 <div class="nav">
 <?php include "includes/nav.php"; ?>
