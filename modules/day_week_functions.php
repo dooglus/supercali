@@ -216,7 +216,7 @@ function showDay($dy,$dm,$da,$caption="") {
 	if($caption) echo $caption;
 	else {
 		echo '<a href="index.php?o=',$la,'&w=',$w,'&c=',$c,'&m=',$dm,'&a=',$da,'&y=',$dy,'">';
-		echo date('l, F j', mktime(0,0,0,$dm,$da,$dy));
+		echo date('l M j', mktime(0,0,0,$dm,$da,$dy));
 		echo '</a>';
 	}
 	echo "</div>";
