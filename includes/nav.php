@@ -83,14 +83,14 @@ function category_nav($category_id) {
 
 
 <form action="index.php" method="post" id="top_form" name="top_form" class="top_form">
-<?php echo $lang["show_events_for"]; ?>:
+<!-- <?php echo $lang["show_events_for"]; ?>:
 <select name="w" id="w">
 <?php 
 $indent = "";
 group_nav(0);
 ?>
-</select>
-<?php echo $lang["in_category"]; ?>:
+</select> -->
+<?php echo $lang["category"]; ?>:
 <select name="c" id="c">
 <?php
 $indent = "";
