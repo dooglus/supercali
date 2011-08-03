@@ -86,14 +86,23 @@ if ($venue_id > 1) {
 	if ($li[4]) echo ", ".$li[4];
 	if ($li[5]) echo ", ".$li[5].", ".$li[6]."  ".$li[7];
 	if ($li[8]) echo ", ".$lang["phone"].": ".$li[8];
-	if ($li[9])echo ", ".$lang["fax"].": ".$li[9];
-	echo "<br />\n";
+	if ($li[9]) echo ", ".$lang["fax"].": ".$li[9];
+	echo "<br/><br/>\n";
 } 
+if ($nicedate[1]) {
+	echo "<strong>" . $lang["dates"] . "</strong>:<ol>\n";
+	while (list($k,$v) = each($nicedate)) {
+		echo "<strong><li>".$v."</li></strong>\n";
+	}
+	echo "</ol>\n";
+} elseif ($nicedate[0]) {
+	echo $lang["date"].": <strong>".$nicedate[0]."</strong><br/><br/>";
+}
 if ($contact_id > 1) {
 	$q = "select url, company, description, address1, address2, city, state, zip, phone, fax  FROM ".$table_prefix."links where link_id = ".$contact_id;
 	$lq = mysql_query($q);
 	
-	echo $lang["contact_sponsor"].": \n";
+	echo "<strong>" . $lang["contact_sponsor"] . "</strong>: \n";
 	$li = mysql_fetch_row($lq);
 	if ($li[0]) { 
 		echo "<strong><a href=\"".$li[0]."\">".$li[1]."</a></strong>";
@@ -105,18 +114,10 @@ if ($contact_id > 1) {
 	if ($li[5]) echo ", ".$li[5].", ".$li[6]."  ".$li[7];
 	if ($li[8]) echo ", ".$lang["phone"].": ".$li[8];
 	if ($li[9])echo ", ".$lang["fax"].": ".$li[9];
-	echo "<br />\n";
-}
-if ($nicedate[1]) {
-	echo "<strong>" . $lang["dates"] . "</strong>:<ul>\n";
-	while (list($k,$v) = each($nicedate)) {
-		echo "<strong><li>".$v."</li></strong>\n";
-	}
-	echo "</ul>\n";
-} elseif ($nicedate[0]) {
-	echo $lang["date"].": <strong>".$nicedate[0]."</strong><br />";
+	echo "<br/><br/>\n";
 }
 
-echo "<p>".$description."</p>\n";
+echo "$description\n";
+
 include "includes/footer.php";
 ?>
