@@ -22,7 +22,7 @@ $nextday =  $next["day"]["y"]."-".$next["day"]["m"]."-".$next["day"]["a"];
 grab($thisday,$nextday,$c);
 echo "<div class=\"frame\">\n";
 echo '<div class="cal_top">';
-echo  '<table width="100%" class="cal_title"><col class="cal_title"/><col class="cal_title_middle"/><col class="cal_title"/><tr>';
+echo  '<table class="cal_title"><colgroup><col class="cal_title"/><col class="cal_title_middle"/><col class="cal_title"/></colgroup><tr>';
 echo   '<th class="cal_title" onclick=\'document.location="',$PHP_SELF,'?o=',$o,'&w=',$w,'&c=',$c,'&m=',$prev["day"]["m"],'&a=',$prev["day"]["a"],'&y=',$prev["day"]["y"],'";\'><a href="',$PHP_SELF,'?o=',$o,'&w=',$w,'&c=',$c,'&m=',$prev["day"]["m"],'&a=',$prev["day"]["a"],'&y=',$prev["day"]["y"],'">&lt;</a></th> ';
 echo   '<th class="cal_title_middle">',date('l, F j, Y', mktime(0,0,0,$m,$a,$y)),'</th>';
 echo   '<th class="cal_title" onclick=\'document.location="',$PHP_SELF,'?o=',$o,'&w=',$w,'&c=',$c,'&m=',$next["day"]["m"],'&a=',$next["day"]["a"],'&y=',$next["day"]["y"],'";\'><a href="',$PHP_SELF,'?o=',$o,'&w=',$w,'&c=',$c,'&m=',$next["day"]["m"],'&a=',$next["day"]["a"],'&y=',$next["day"]["y"],'">&gt;</a></th>';

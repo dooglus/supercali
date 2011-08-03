@@ -22,7 +22,7 @@ $nextweek =  $next["week"]["y"]."-".$next["week"]["m"]."-".$next["week"]["a"];
 grab($thisweek,$nextweek,$c);
 echo "<div class=\"frame\">\n";
 echo '<div class="cal_top">';
-echo  '<table width="100%" class="cal_title"><col class="cal_title"/><col class="cal_title_middle"/><col class="cal_title"/><tr>';
+echo  '<table class="cal_title"><colgroup><col class="cal_title"/><col class="cal_title_middle"/><col class="cal_title"/></colgroup><tr>';
 echo   '<th class="cal_title" onclick=\'document.location="',$PHP_SELF,'?o=',$o,'&w=',$w,'&c=',$c,'&m=',$prev["week"]["m"],'&a=',$prev["week"]["a"],'&y=',$prev["week"]["y"],'";\'><a href="',$PHP_SELF,'?o=',$o,'&w=',$w,'&c=',$c,'&m=',$prev["week"]["m"],'&a=',$prev["week"]["a"],'&y=',$prev["week"]["y"],'">&lt;</a></th>';
 echo   '<th class="cal_title_middle">',$lang["week_of"],date('F j, Y', mktime(0,0,0,$now["week"]["m"][0],$now["week"]["a"][0],$now["week"]["y"][0])),'</th>';
 echo   '<th class="cal_title" onclick=\'document.location="',$PHP_SELF,'?o=',$o,'&w=',$w,'&c=',$c,'&m=',$next["week"]["m"],'&a=',$next["week"]["a"],'&y=',$next["week"]["y"],'";\'><a href="',$PHP_SELF,'?o=',$o,'&w=',$w,'&c=',$c,'&m=',$next["week"]["m"],'&a=',$next["week"]["a"],'&y=',$next["week"]["y"],'">&gt;</a></th>';
