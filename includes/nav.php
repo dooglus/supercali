@@ -100,7 +100,6 @@ category_nav(0);
 <?php echo $lang["for_date"]; ?>: <input type="text" name="godate" id="godate" value="<?php echo $m."/".$a."/".$y; ?>" size="10"> <a href="Javascript://" onclick="topcal.select(document.top_form.godate,this.name,'MM/dd/yyyy'); return false;" NAME="anchor_godate" ID="anchor_godate"><img src="images/calendar.png" border="0" /></a>
 <input type="submit" value="<?php echo $lang["go"]; ?>">
 </form>
-<?php echo $lang["calendar_views"]; ?>:&nbsp;&nbsp;&nbsp;
 <?php
 $q = "SELECT module_id, link_name from ".$table_prefix."modules where active = 1 order by sequence";
 $query = mysql_query($q);
