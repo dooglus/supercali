@@ -82,7 +82,12 @@ function showMonth ($calmonth,$calyear) {
 	
 	/* build table */
 	echo '<table width="100%" class="grid""><tr>'; 
-	echo '<th colspan="7" class="cal_top"><a href="',$PHP_SELF,'?o=',$o,'&w=',$w,'&c=',$c,'&m=',$prev["month"]["m"],'&a=1&y=',$prev["month"]["y"],'">&lt;</a> ',date('F', mktime(0,0,0,$calmonth,1,$calyear)),'&nbsp;',date('Y', mktime(0,0,0,$calmonth,1,$calyear)),' <a href="',$PHP_SELF,'?o=',$o,'&w=',$w,'&c=',$c,'&m=',$next["month"]["m"],'&a=1&y=',$next["month"]["y"],'">&gt;</a></th></tr><tr>';
+	echo '<th colspan="7" class="cal_top">';
+        echo  '<table width="100%" class="cal_title"><tr>';
+        echo   '<th class="cal_title" onclick="document.location=\'',$PHP_SELF,'?o=',$o,'&w=',$w,'&c=',$c,'&m=',$prev["month"]["m"],'&a=1&y=',$prev["month"]["y"],'\';"><a href="',$PHP_SELF,'?o=',$o,'&w=',$w,'&c=',$c,'&m=',$prev["month"]["m"],'&a=1&y=',$prev["month"]["y"],'">&lt;</a></th>';
+        echo   '<th class="cal_title_middle"> ',date('F', mktime(0,0,0,$calmonth,1,$calyear)),'&nbsp;',date('Y', mktime(0,0,0,$calmonth,1,$calyear)),' </th>';
+        echo   '<th class="cal_title" onclick="document.location=\'',$PHP_SELF,'?o=',$o,'&w=',$w,'&c=',$c,'&m=',$next["month"]["m"],'&a=1&y=',$next["month"]["y"],'\';"><a href="',$PHP_SELF,'?o=',$o,'&w=',$w,'&c=',$c,'&m=',$next["month"]["m"],'&a=1&y=',$next["month"]["y"],'">&gt;</a></th>';
+        echo  '</tr></table></th></tr><tr>';
 	for ( $x = 0; $x < 7; $x++ )
 	        echo '<th>', $week_titles[ $x ], '</th>';
 	

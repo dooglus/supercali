@@ -23,6 +23,22 @@ table.grid th.cal_top {
 	font-size: 16pt;
 }
 
+table.cal_title {
+	border: 1px;
+	background: #B0E0E6;
+}
+
+th.cal_title {
+	border: 1px solid #000;
+	background: #ffe4b5;
+}
+
+th.cal_title_middle {
+	border: 1px solid #000;
+	background: #ffe4b5;
+	width: 33%;
+}
+
 table.grid td {
 	background: #FFF;
 }
@@ -47,6 +63,7 @@ A {
 	color: #000;
 	padding: 10px;
 	border-bottom: 1px solid #000;
+	text-align: center;
 }
 
 .nav {
@@ -162,6 +179,11 @@ form.top_form {
 .day ul {
 	margin: 5px;
 	padding: 0px 15px;
+	list-style: none;
+	// list-style-image: url(http://fivestardogs.ca/images/star/gold.png);
+}
+.day li {
+	padding: 5px 0px;
 }
 .day_of_month {
 	text-align: right;
@@ -253,6 +275,7 @@ clear: both;
 .frame {
 	background: #fff;
 	border: 1px solid #000;
+	margin: 20px 0px;
 }
 
 div.cal_top {
@@ -325,11 +348,11 @@ td.single_day {
 }
 
 .inner .time, .inner .venue, .inner .location, .inner .edit {
-	font-size: 6pt;
+	font-size: 8pt;
 }
 
 .inner .title {
-	font-size: 8pt;
+	font-size: 10pt;
 }
 .code {
 	font-family: Courier New;

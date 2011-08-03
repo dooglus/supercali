@@ -47,7 +47,13 @@ function showQuarter ($quarter,$calyear) {
 	global $week_titles_s, $o, $m, $a, $y, $w, $c, $next, $prev,$lm, $le, $la;
 	global $prevmonth, $prevyear, $nextmonth, $nextyear;
 	echo '<table width="100%" class="grid""><tr>'; 
-	echo '<th colspan="3" class="cal_top"><a href="',$PHP_SELF,'?o=',$o,'&c=',$c,'&m=',$prevmonth,'&a=1&y=',$prevyear,'">&lt;</a>&nbsp;',$calyear,' - Quarter ',$quarter,'&nbsp;<a href="',$PHP_SELF,'?o=',$o,'&c=',$c,'&m=',$nextmonth,'&a=1&y=',$nextyear,'">&gt;</a></th></tr>';
+	echo '<th colspan="3" class="cal_top">';
+	echo  '<table width="100%" class="cal_title"><tr>';
+	echo   '<th class="cal_title" onclick=\'document.location="',$PHP_SELF,'?o=',$o,'&c=',$c,'&m=',$prevmonth,'&a=1&y=',$prevyear,'";\'><a href="',$PHP_SELF,'?o=',$o,'&c=',$c,'&m=',$prevmonth,'&a=1&y=',$prevyear,'">&lt;</a></th>';
+        echo   '<th class="cal_title_middle">',$calyear,' - Quarter ',$quarter,'</th>';
+        echo   '<th class="cal_title" onclick=\'document.location="',$PHP_SELF,'?o=',$o,'&c=',$c,'&m=',$nextmonth,'&a=1&y=',$nextyear,'";\'><a href="',$PHP_SELF,'?o=',$o,'&c=',$c,'&m=',$nextmonth,'&a=1&y=',$nextyear,'">&gt;</a></th>';
+	echo  '</tr></table>';
+        echo '</th></tr>';
 	echo '<tr>';
 	$calmonth = $quarter * 3 - 3;
 	for($q=0;$q<3;$q++){
