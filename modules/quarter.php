@@ -48,7 +48,7 @@ function showQuarter ($quarter,$calyear) {
 	global $prevmonth, $prevyear, $nextmonth, $nextyear;
 	echo '<table width="100%" class="grid""><tr>'; 
 	echo '<th colspan="3" class="cal_top">';
-	echo  '<table width="100%" class="cal_title"><tr>';
+	echo  '<table width="100%" class="cal_title"><col class="cal_title"/><col class="cal_title_middle"/><col class="cal_title"/><tr>';
 	echo   '<th class="cal_title" onclick=\'document.location="',$PHP_SELF,'?o=',$o,'&c=',$c,'&m=',$prevmonth,'&a=1&y=',$prevyear,'";\'><a href="',$PHP_SELF,'?o=',$o,'&c=',$c,'&m=',$prevmonth,'&a=1&y=',$prevyear,'">&lt;</a></th>';
         echo   '<th class="cal_title_middle">',$calyear,' - Quarter ',$quarter,'</th>';
         echo   '<th class="cal_title" onclick=\'document.location="',$PHP_SELF,'?o=',$o,'&c=',$c,'&m=',$nextmonth,'&a=1&y=',$nextyear,'";\'><a href="',$PHP_SELF,'?o=',$o,'&c=',$c,'&m=',$nextmonth,'&a=1&y=',$nextyear,'">&gt;</a></th>';

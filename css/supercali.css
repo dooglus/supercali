@@ -24,23 +24,30 @@ table.grid th.cal_top {
 }
 
 table.cal_title {
-	border: 1px;
+	border: 0px;
 	background: #B0E0E6;
 }
 
-th.cal_title {
-	border: 1px solid #000;
-	background: #ffe4b5;
+table.grid th.cal_title, th.cal_title {
+	border: 0px;
+	background: #A0D0D6;
 }
 
-th.cal_title_middle {
-	border: 1px solid #000;
-	background: #ffe4b5;
-	width: 33%;
+table.grid th.cal_title_middle, th.cal_title_middle {
+	border: 0px;
+	background: #B0E0E6;
 }
 
 table.grid td {
 	background: #FFF;
+}
+
+col.cal_title {
+	width: 30%;
+}
+
+col.cal_title_middle {
+	width: 40%;
 }
 
 
