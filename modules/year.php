@@ -47,7 +47,13 @@ function showGrid($date) {
 function showYear ($calyear) {
 	global $week_titles_ss, $o, $m, $a, $y, $w, $c, $next, $prev, $lm, $la, $le;
 	echo '<table width="100%" class="grid""><tr>'; 
-	echo '<th colspan="4" class="cal_top"><a href="',$PHP_SELF,'?o=',$o,'&w=',$w,'&c=',$c,'&m=',$m,'&a=1&y=',$prev['year']['y'],'">&lt;</a>&nbsp;',$calyear,'&nbsp;<a href="',$PHP_SELF,'?o=',$o,'&w=',$w,'&c=',$c,'&m=',$m,'&a=1&y=',$next['year']['y'],'">&gt;</a></th></tr>';
+	echo '<th colspan="4" class="cal_top">';
+	echo  '<table width="100%" class="cal_title"><tr>';
+        echo   '<th class="cal_title" onclick=\'document.location="',$PHP_SELF,'?o=',$o,'&w=',$w,'&c=',$c,'&m=',$m,'&a=1&y=',$prev['year']['y'],'";\'><a href="',$PHP_SELF,'?o=',$o,'&w=',$w,'&c=',$c,'&m=',$m,'&a=1&y=',$prev['year']['y'],'">&lt;</a></th>';
+        echo   '<th class="cal_title_middle">',$calyear,"</th>";
+        echo   '<th class="cal_title" onclick=\'document.location="',$PHP_SELF,'?o=',$o,'&w=',$w,'&c=',$c,'&m=',$m,'&a=1&y=',$next['year']['y'],'";\'><a href="',$PHP_SELF,'?o=',$o,'&w=',$w,'&c=',$c,'&m=',$m,'&a=1&y=',$next['year']['y'],'">&gt;</a></th>';
+	echo  '</tr></table>';
+        echo '</th></tr>';
 	$calmonth = 0;
 		for($p=0;$p<3;$p++){
 			echo '<tr>';
