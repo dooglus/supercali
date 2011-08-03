@@ -150,12 +150,12 @@ function showGrid($date) {
 				if (($status[$start_event[$r][$k]] == 2) || ($status[$start_event[$r][$k]] == 3)) echo " filter:alpha(opacity=80); opacity:.80; -moz-opacity:.80; zoom: 1; border: 1px dashed ".$color[$start_event[$r][$k]].";";
 				echo "\"><div class=\"inner\">";
 			
-				echo "<div class=\"title\"><a href=\"show_event.php?id=".$start_event[$r][$k]."&o=".$o."&c=".$c."&m=".$m."&a=".$a."&y=".$y."&w=".$w."\" onClick=\"openPic('show_event.php?id=".$start_event[$r][$k]."&size=small','pop','600','400'); window.newWindow.focus(); return false\"";
-				if ($color[$start_event[$r][$k]]) echo " style=\"color: ".$color[$start_event[$r][$k]]."; background: ".$background[$start_event[$r][$k]].";\"";
-				echo ">".$title[$start_event[$r][$k]]."</a></div>\n";
 				echo "<span class=\"time\">".$sta_e[$r][$k];
 				if ($end_e[$r][$k]) echo " - ".$end_e[$r][$k];
 				echo "</span>\n";
+				echo "<div class=\"title\"><a href=\"show_event.php?id=".$start_event[$r][$k]."&o=".$o."&c=".$c."&m=".$m."&a=".$a."&y=".$y."&w=".$w."\" onClick=\"openPic('show_event.php?id=".$start_event[$r][$k]."&size=small','pop','600','400'); window.newWindow.focus(); return false\"";
+				if ($color[$start_event[$r][$k]]) echo " style=\"color: ".$color[$start_event[$r][$k]]."; background: ".$background[$start_event[$r][$k]].";\"";
+				echo ">".$title[$start_event[$r][$k]]."</a></div>\n";
 				if ($ed[$start_event[$r][$k]]==true) {
 					echo "&nbsp;&nbsp;<span class=\"edit\">";
 					if (($ap[$start_event[$r][$k]]==true) && (($status[$start_event[$r][$k]] == 2) || ($status[$start_event[$r][$k]] == 3))) echo "[<a href=\"admin_actions.php?id=".$start_event[$r][$k]."&o=".$o."&c=".$c."&m=".$m."&a=".$a."&y=".$y."&w=".$w."&mode=".approve."\">".$lang["approve"]."</a>]&nbsp;&nbsp;";
