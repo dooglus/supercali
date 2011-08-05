@@ -46,7 +46,44 @@ function grabDates($start,$end,$category_array) {
 		$superedit = true;
 	}
 	if (($mod > 0) || ($superedit)) {
-		$q = "select DATE_FORMAT(".$table_prefix."dates.date, '%Y%m%d'), DATE_FORMAT(".$table_prefix."dates.date, '%H%i'), ".$table_prefix."events.event_id, ".$table_prefix."events.title, DATE_FORMAT(".$table_prefix."dates.date, '%W, %M %e, %Y'), DATE_FORMAT(".$table_prefix."dates.date, '%l:%i %p'),  DATE_FORMAT(".$table_prefix."dates.end_date, '%l:%i %p'), ".$table_prefix."links.company, ".$table_prefix."links.city, ".$table_prefix."links.state, ".$table_prefix."events.category_id, ".$table_prefix."events.user_id, ".$table_prefix."dates.date, ".$table_prefix."categories.color, ".$table_prefix."categories.background, ".$table_prefix."events.status_id from ".$table_prefix."events, ".$table_prefix."dates, ".$table_prefix."links, ".$table_prefix."categories, ".$table_prefix."groups where ".$table_prefix."dates.date >= '$start' and ".$table_prefix."dates.date < '$end' and ".$table_prefix."dates.event_id = ".$table_prefix."events.event_id and ".$table_prefix."events.venue_id = ".$table_prefix."links.link_id and ".$table_prefix."events.category_id in (".$cats.") and ".$table_prefix."events.category_id = ".$table_prefix."categories.category_id and ".$table_prefix."events.group_id = ".$table_prefix."groups.group_id and ".$table_prefix."events.group_id = ".$w." order by ".$table_prefix."dates.date";
+		$q = "
+			SELECT
+				DATE_FORMAT($table_prefix.dates.date, '%Y%m%d'),
+				DATE_FORMAT($table_prefix.dates.date, '%H%i'),
+				$table_prefix.events.event_id,
+				$table_prefix.events.title,
+				DATE_FORMAT($table_prefix.dates.date, '%W, %M %e, %Y'),
+				CONCAT(DATE_FORMAT($table_prefix.dates.date, '%l:%i'),
+				       LOWER(DATE_FORMAT($table_prefix.dates.date, '%p'))),
+				CONCAT(DATE_FORMAT($table_prefix.dates.end_date, '%l:%i'),
+				       LOWER(DATE_FORMAT($table_prefix.dates.end_date, '%p'))),
+				$table_prefix.links.company,
+				$table_prefix.links.city,
+				$table_prefix.links.state,
+				$table_prefix.events.category_id,
+				$table_prefix.events.user_id,
+				$table_prefix.dates.date,
+				$table_prefix.categories.color,
+				$table_prefix.categories.background,
+				$table_prefix.events.status_id
+			FROM
+				$table_prefix.events,
+				$table_prefix.dates,
+				$table_prefix.links,
+				$table_prefix.categories,
+				$table_prefix.groups
+			WHERE
+				$table_prefix.dates.date >= '$start' AND
+				$table_prefix.dates.date < '$end' AND
+				$table_prefix.dates.event_id = $table_prefix.events.event_id AND
+				$table_prefix.events.venue_id = $table_prefix.links.link_id AND
+				$table_prefix.events.category_id in ($cats) AND
+				$table_prefix.events.category_id = $table_prefix.categories.category_id AND
+				$table_prefix.events.group_id = $table_prefix.groups.group_id AND
+				$table_prefix.events.group_id = $w
+			ORDER BY
+				$table_prefix.dates.date;
+		";
 		$query = mysql_query($q);
 		//echo $q."<br>";
 		while ($row = mysql_fetch_row($query)) {
