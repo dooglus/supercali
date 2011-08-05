@@ -113,6 +113,7 @@ A {
 }
 .content .item {
 	padding: 2px;
+	cursor: pointer;
 }
 h1 {
 	font-size: 18pt;	
@@ -264,6 +265,7 @@ table.grid td.holder {
     overflow-y: hidden;    /* changed from auto because I didn't want the scroll bar */
     overflow-x: hidden;    /* added to allow IE to size the width of the event properly */
     margin: 0px;
+    cursor: pointer;
 }
 .wrap{
 width: 100%;

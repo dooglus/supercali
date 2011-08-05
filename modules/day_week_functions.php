@@ -144,7 +144,7 @@ function showGrid($date) {
 				$v = $v+30;
 				$left = $wide * $r;
 				// wrap fix from Vepr				
-				echo "<div class=\"wrap\"><div class=\"date\" style=\"";
+				echo "<div class=\"wrap\"><div class=\"date\" onclick=\"openPic('show_event.php?id=".$start_event[$r][$k]."&size=small','pop','600','400'); window.newWindow.focus(); return false\" style=\"";
 				echo "height: ".$event_length[$r][$k]."px; top: ".$v."px; width: ".$notsowide."%; left:".$left."%;";
 				if ($color[$start_event[$r][$k]]) echo "color: ".$color[$start_event[$r][$k]]."; background: ".$background[$start_event[$r][$k]].";";
 				if (($status[$start_event[$r][$k]] == 2) || ($status[$start_event[$r][$k]] == 3)) echo " filter:alpha(opacity=80); opacity:.80; -moz-opacity:.80; zoom: 1; border: 1px dashed ".$color[$start_event[$r][$k]].";";

@@ -41,7 +41,7 @@ function showGrid($date) {
 		while (list($t) = each($start_time[$date])) {
 			while (list($id,$value) = each($start_time[$date][$t])) {
 				echo "<li>";
-				echo "<div class=\"item\"";
+				echo "<div class=\"item\" onClick=\"openPic('show_event.php?id=".$id."&size=small','pop','600','400'); window.newWindow.focus(); return false\"";
 				if ($color[$id]) echo " style=\"color: ".$color[$id]."; background: ".$background[$id].";\"";
 				echo ">";
 				echo "<div class=\"time\">".$value;
