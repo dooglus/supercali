@@ -31,6 +31,7 @@ table.cal_title {
 table.grid th.cal_title, th.cal_title {
 	border: 0px;
 	background: #A0D0D6;
+	cursor: pointer;
 }
 
 table.grid th.cal_title_middle, th.cal_title_middle {
