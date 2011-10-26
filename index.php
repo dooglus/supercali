@@ -48,41 +48,41 @@ function grabDates($start,$end,$category_array) {
 	if (($mod > 0) || ($superedit)) {
 		$q = "
 			SELECT
-				DATE_FORMAT($table_prefix.dates.date, '%Y%m%d'),
-				DATE_FORMAT($table_prefix.dates.date, '%H%i'),
-				$table_prefix.events.event_id,
-				$table_prefix.events.title,
-				DATE_FORMAT($table_prefix.dates.date, '%W, %M %e, %Y'),
-				CONCAT(DATE_FORMAT($table_prefix.dates.date, '%l:%i'),
-				       LOWER(DATE_FORMAT($table_prefix.dates.date, '%p'))),
-				CONCAT(DATE_FORMAT($table_prefix.dates.end_date, '%l:%i'),
-				       LOWER(DATE_FORMAT($table_prefix.dates.end_date, '%p'))),
-				$table_prefix.links.company,
-				$table_prefix.links.city,
-				$table_prefix.links.state,
-				$table_prefix.events.category_id,
-				$table_prefix.events.user_id,
-				$table_prefix.dates.date,
-				$table_prefix.categories.color,
-				$table_prefix.categories.background,
-				$table_prefix.events.status_id
+				DATE_FORMAT({$table_prefix}dates.date, '%Y%m%d'),
+				DATE_FORMAT({$table_prefix}dates.date, '%H%i'),
+				{$table_prefix}events.event_id,
+				{$table_prefix}events.title,
+				DATE_FORMAT({$table_prefix}dates.date, '%W, %M %e, %Y'),
+				CONCAT(DATE_FORMAT({$table_prefix}dates.date, '%l:%i'),
+				       LOWER(DATE_FORMAT({$table_prefix}dates.date, '%p'))),
+				CONCAT(DATE_FORMAT({$table_prefix}dates.end_date, '%l:%i'),
+				       LOWER(DATE_FORMAT({$table_prefix}dates.end_date, '%p'))),
+				{$table_prefix}links.company,
+				{$table_prefix}links.city,
+				{$table_prefix}links.state,
+				{$table_prefix}events.category_id,
+				{$table_prefix}events.user_id,
+				{$table_prefix}dates.date,
+				{$table_prefix}categories.color,
+				{$table_prefix}categories.background,
+				{$table_prefix}events.status_id
 			FROM
-				$table_prefix.events,
-				$table_prefix.dates,
-				$table_prefix.links,
-				$table_prefix.categories,
-				$table_prefix.groups
+				{$table_prefix}events,
+				{$table_prefix}dates,
+				{$table_prefix}links,
+				{$table_prefix}categories,
+				{$table_prefix}groups
 			WHERE
-				$table_prefix.dates.date >= '$start' AND
-				$table_prefix.dates.date < '$end' AND
-				$table_prefix.dates.event_id = $table_prefix.events.event_id AND
-				$table_prefix.events.venue_id = $table_prefix.links.link_id AND
-				$table_prefix.events.category_id in ($cats) AND
-				$table_prefix.events.category_id = $table_prefix.categories.category_id AND
-				$table_prefix.events.group_id = $table_prefix.groups.group_id AND
-				$table_prefix.events.group_id = $w
+				{$table_prefix}dates.date >= '$start' AND
+				{$table_prefix}dates.date < '$end' AND
+				{$table_prefix}dates.event_id = {$table_prefix}events.event_id AND
+				{$table_prefix}events.venue_id = {$table_prefix}links.link_id AND
+				{$table_prefix}events.category_id in ($cats) AND
+				{$table_prefix}events.category_id = {$table_prefix}categories.category_id AND
+				{$table_prefix}events.group_id = {$table_prefix}groups.group_id AND
+				{$table_prefix}events.group_id = $w
 			ORDER BY
-				$table_prefix.dates.date;
+				{$table_prefix}dates.date, {$table_prefix}events.category_id;
 		";
 		$query = mysql_query($q);
 		//echo $q."<br>";
@@ -114,17 +114,17 @@ function grabDates($start,$end,$category_array) {
 			$cat_id = $row[10];
 			$mycolor = $row[13];
 			while ($mycolor == '') {
-			   $cat_id = mysql_result(mysql_query("select sub_of from ".$table_prefix."categories where category_id = ".$cat_id),0,0);
+			   $cat_id = mysql_result(mysql_query("select sub_of from {$table_prefix}categories where category_id = ".$cat_id),0,0);
 			   if ($cat_id == "0") break;
-			   $mycolor = mysql_result(mysql_query("select color from ".$table_prefix."categories where category_id = ".$cat_id),0,0);
+			   $mycolor = mysql_result(mysql_query("select color from {$table_prefix}categories where category_id = ".$cat_id),0,0);
 			}
 
 			$cat_id = $row[10];
 			$mybg = $row[14];
 			while ($mybg == '') {
-			   $cat_id = mysql_result(mysql_query("select sub_of from ".$table_prefix."categories where category_id = ".$cat_id),0,0);
+			   $cat_id = mysql_result(mysql_query("select sub_of from {$table_prefix}categories where category_id = ".$cat_id),0,0);
 			   if ($cat_id == "0") break;
-			   $mybg = mysql_result(mysql_query("select background from ".$table_prefix."categories where category_id = ".$cat_id),0,0);
+			   $mybg = mysql_result(mysql_query("select background from {$table_prefix}categories where category_id = ".$cat_id),0,0);
 			}
 
 			$color[$row[2]]=$mycolor;
@@ -139,7 +139,7 @@ function grab($start,$end,$category) {
 	$canview = false;
 	$groupview = false;
 	if (!$supergroup) {
-		$q = "SELECT * from ".$table_prefix."users_to_groups where group_id = ".$w." and  user_id = ".$_SESSION["user_id"];
+		$q = "SELECT * from {$table_prefix}users_to_groups where group_id = ".$w." and  user_id = ".$_SESSION["user_id"];
 		$query = mysql_query($q);
 		if (mysql_num_rows($query) > 0) $groupview = true;
 	} else {
@@ -148,7 +148,7 @@ function grab($start,$end,$category) {
 	if ($groupview) {
 		if (!$supercategory) {
 			//build permission array
-			$q = "SELECT category_id from ".$table_prefix."users_to_categories where user_id = ".$_SESSION["user_id"];
+			$q = "SELECT category_id from {$table_prefix}users_to_categories where user_id = ".$_SESSION["user_id"];
 			//echo $q."<br>";
 			$query = mysql_query($q);
 			if (mysql_num_rows($query) > 0) {
@@ -184,7 +184,7 @@ function grab_child($start,$end,$category,$starter=false) {
 	}
 	if ($canview) {
 		if (!$starter) $category_array[] = $category;
-		$q = "select category_id from ".$table_prefix."categories where sub_of = ".$category;
+		$q = "select category_id from {$table_prefix}categories where sub_of = ".$category;
 		//echo $q."<br>";
 		$query = mysql_query($q);
 		if (!$query) $msg = "Database Error : ".$q;
@@ -209,7 +209,7 @@ function grab_parent($start,$end,$category,$starter=false) {
 	if ($canview) {
 		if (!$starter) $category_array[] = $category;
 		
-		$q = "select sub_of from ".$table_prefix."categories where category_id = ".$category;
+		$q = "select sub_of from {$table_prefix}categories where category_id = ".$category;
 		//echo $q."<br>";
 		$query = mysql_query($q);
 		if (!$query) $msg = "Database Error : ".$q;
@@ -239,7 +239,7 @@ if (($supergroup) && ($supercategory)) {
 	
 	if (!$supercategory) {
 		$canview = false;
-		$q = "select * from ".$table_prefix."users_to_categories where category_id = ".$c." and user_id = ".$_SESSION["user_id"];
+		$q = "select * from {$table_prefix}users_to_categories where category_id = ".$c." and user_id = ".$_SESSION["user_id"];
 		//echo $q;
 		$qu = mysql_query($q);
 		if (mysql_num_rows($qu) > 0) {
@@ -252,7 +252,7 @@ if (($supergroup) && ($supercategory)) {
 		}
 	}
 	if ((!$supergroup) && $canview) {
-		$q = "select * from ".$table_prefix."users_to_groups where group_id = ".$w." and user_id = ".$_SESSION["user_id"];
+		$q = "select * from {$table_prefix}users_to_groups where group_id = ".$w." and user_id = ".$_SESSION["user_id"];
 		//echo $q;
 		$qu = mysql_query($q);
 		if (mysql_num_rows($qu) > 0) {
