@@ -190,7 +190,12 @@ function addCategory() {
 		$q = "INSERT INTO ".$table_prefix."categories (name, sub_of, sequence, description, color, background) values ('".$name."', '".$sub_of."', '".$sequence."', '".$description."', '".$color."', '".$background."')";
 		$query = mysql_query($q);
 		if (!$query) $msg = $lang["database_error_category_not_updated"];
-		else $msg = $lang["cateogory_added"];
+		else {
+                    $msg = $lang["category_added"];
+                    $id = mysql_insert_id();
+                    $q = "INSERT INTO ".$table_prefix."users_to_categories (user_id, category_id, moderate) values (1, $id, 1)";
+                    $query = mysql_query($q);
+                }
 	}
 	mysql_close($link);
 	header("Location: edit_categories.php?msg=".$msg."&".$common_get);
