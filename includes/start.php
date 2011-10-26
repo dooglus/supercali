@@ -63,7 +63,7 @@ if ((is_numeric($_REQUEST["m"]))&& ($_REQUEST["m"]!= 0)) {
 } elseif ($_SESSION["m"]) {
 	$m = $_SESSION["m"];
 } else {
-	$m = date(m);
+	$m = date("m");
 }
 if (strlen($m) == 1) $m = "0".$m;
 
@@ -74,7 +74,7 @@ if ((is_numeric($_REQUEST["a"]))&& ($_REQUEST["a"]!= 0)) {
 } elseif ($_SESSION["a"]) {
 	$a = $_SESSION["a"];
 } else {
-	$a = date(d);
+	$a = date("d");
 }
 if (strlen($a) == 1) $a = "0".$a;
 
@@ -84,7 +84,7 @@ if ((is_numeric($_REQUEST["y"]))&& ($_REQUEST["y"]!= 0)) {
 } elseif ($_SESSION["y"]) {
 	$y = $_SESSION["y"];
 } else {
-	$y = date(Y);
+	$y = date("Y");
 }
 
 
