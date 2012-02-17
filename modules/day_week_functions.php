@@ -22,7 +22,7 @@ For further information visit:
 http://supercali.inforest.com/
 */
 function showGrid($date) {
-	global $title, $niceday, $start_time, $end_time, $venue, $city, $state, $cat, $color, $background, $ed, $usr, $o, $c, $m, $a, $y, $w, $lang,$scale,$ap,$status, $day_week_start_hour, $day_week_end_hour;
+	global $title, $niceday, $start_time, $end_time, $venue, $city, $state, $cat, $color, $background, $css, $ed, $usr, $o, $c, $m, $a, $y, $w, $lang,$scale,$ap,$status, $day_week_start_hour, $day_week_end_hour;
 	$threshold_hour = $day_week_start_hour ? $day_week_start_hour : 0;
 	$threshold_min = $day_week_start_hour ? 0 : 30;
 	$txi = ($threshold_hour * 60) + $threshold_min;
@@ -141,21 +141,23 @@ function showGrid($date) {
 		reset($start_fill);
 		while (list($r) = each($start_fill)) {
 			while (list($k,$v) = each($start_fill[$r])) {
-				$v = $v+30;
+				// $v = $v+30;
 				$left = $wide * $r;
 				// wrap fix from Vepr				
-				echo "<div class=\"wrap\"><div class=\"date\" onclick=\"openPic('show_event.php?id=".$start_event[$r][$k]."&size=small','pop','600','400'); window.newWindow.focus(); return false\" style=\"";
+				echo "<div class=\"wrap\"><div class=\"date\" style=\"";
 				echo "height: ".$event_length[$r][$k]."px; top: ".$v."px; width: ".$notsowide."%; left:".$left."%;";
-				if ($color[$start_event[$r][$k]]) echo "color: ".$color[$start_event[$r][$k]]."; background: ".$background[$start_event[$r][$k]].";";
+				if ($color[$start_event[$r][$k]]) echo "color: ".$color[$start_event[$r][$k]]."; background: ".$background[$start_event[$r][$k]]."; ";
+				if ($css[$start_event[$r][$k]]) echo $css[$start_event[$r][$k]];
 				if (($status[$start_event[$r][$k]] == 2) || ($status[$start_event[$r][$k]] == 3)) echo " filter:alpha(opacity=80); opacity:.80; -moz-opacity:.80; zoom: 1; border: 1px dashed ".$color[$start_event[$r][$k]].";";
-				echo "\"><div class=\"inner\">";
+				echo "\"><div class=\"inner\" onclick=\"openPic('show_event.php?id=".$start_event[$r][$k]."&size=small','pop','600','400'); window.newWindow.focus(); return false\">";
 			
 				echo "<span class=\"time\">".$sta_e[$r][$k];
 				if ($end_e[$r][$k]) echo " - ".$end_e[$r][$k];
 				echo "</span>\n";
-				echo "<div class=\"title\"><a href=\"show_event.php?id=".$start_event[$r][$k]."&o=".$o."&c=".$c."&m=".$m."&a=".$a."&y=".$y."&w=".$w."\" onClick=\"openPic('show_event.php?id=".$start_event[$r][$k]."&size=small','pop','600','400'); window.newWindow.focus(); return false\"";
-				if ($color[$start_event[$r][$k]]) echo " style=\"color: ".$color[$start_event[$r][$k]]."; background: ".$background[$start_event[$r][$k]].";\"";
-				echo ">".$title[$start_event[$r][$k]]."</a></div>\n";
+				echo "<div class=\"title\"><a href=\"show_event.php?id=".$start_event[$r][$k]."&o=".$o."&c=".$c."&m=".$m."&a=".$a."&y=".$y."&w=".$w."\" onClick=\"openPic('show_event.php?id=".$start_event[$r][$k]."&size=small','pop','600','400'); window.newWindow.focus(); return false\" style=\"";
+				if ($color[$start_event[$r][$k]]) echo "color: ".$color[$start_event[$r][$k]]."; background: ".$background[$start_event[$r][$k]]."; ";
+				if ($css[$start_event[$r][$k]]) echo $css[$start_event[$r][$k]];
+				echo "\">".$title[$start_event[$r][$k]]."</a></div>\n";
 				if ($venue[$start_event[$r][$k]]) {
 					echo "<div class=\"venue\">".$venue[$start_event[$r][$k]]."</div>\n";
 					if ($city[$start_event[$r][$k]]) {
@@ -164,12 +166,13 @@ function showGrid($date) {
 						echo "</div>\n";
 					}
 				}
+                                echo "</div>\n";
 				if ($ed[$start_event[$r][$k]]==true) {
 					echo "&nbsp;&nbsp;<span class=\"edit\">";
 					if (($ap[$start_event[$r][$k]]==true) && (($status[$start_event[$r][$k]] == 2) || ($status[$start_event[$r][$k]] == 3))) echo "[<a href=\"admin_actions.php?id=".$start_event[$r][$k]."&o=".$o."&c=".$c."&m=".$m."&a=".$a."&y=".$y."&w=".$w."&mode=".approve."\">".$lang["approve"]."</a>]&nbsp;&nbsp;";
 					echo "[<a href=\"edit_event.php?id=".$start_event[$r][$k]."&o=".$o."&c=".$c."&m=".$m."&a=".$a."&y=".$y."&w=".$w."\" onClick=\"openPic('edit_event.php?id=".$start_event[$r][$k]."&size=small','pop','650','700'); window.newWindow.focus(); return false\">".$lang["edit"]."</a>]&nbsp;&nbsp;[<a href=\"delete_event.php?id=".$start_event[$r][$k]."&o=".$o."&c=".$c."&m=".$m."&a=".$a."&y=".$y."&w=".$w."\">".$lang["delete"]."</a>]</span>\n";
 				}
-				echo "</div></div></div>\n";
+				echo "</div></div>\n";
 			}
 		}
 	
@@ -183,7 +186,7 @@ function showHours() {
 	// build day
 	echo "<td class=\"timex\"><table class=\"day\"><tr><td width=\"100%\"><div class=\"time_frame\">\n";
 	echo "<div class=\"cell_top\">Time</div>\n";
-	echo "<div class=\"cell\">12:00 am ".$day_week_start_min."</div>\n";
+	// echo "<div class=\"cell\">12:00 am ".$day_week_start_min."</div>\n";
 	$i = $day_week_start_hour ? $day_week_start_hour : 0;
 	$j = $day_week_start_hour ? 0 : 30;
 	$max = $day_week_end_hour ? $day_week_end_hour : 24;
@@ -228,7 +231,7 @@ function showDay($dy,$dm,$da,$caption="") {
 		echo '</a>';
 	}
 	echo "</div>";
-	echo "<div class=\"cell\" id=\"0:00:".$dm."/".$da."/".$dy."\"></div>\n";
+	// echo "<div class=\"cell\" id=\"0:00:".$dm."/".$da."/".$dy."\"></div>\n";
 	$i = $day_week_start_hour ? $day_week_start_hour : 0;
 	$j = $day_week_start_hour ? 0 : 30;
 	$max = $day_week_end_hour ? $day_week_end_hour : 24;
@@ -253,7 +256,7 @@ function showDay($dy,$dm,$da,$caption="") {
 		}
 		if ($i < 10) $i = $i;
 		//echo "<div class=\"cell\" id=\"".$i.":".$j."\">".$h.":".$j." ".$ap."</div>\n";
-		echo "<div class=\"cell\" id=\"".$i.":".$j.":".$dm."/".$da."/".$dy."\"></div>\n";
+		echo "<div class=\"cell\"></div>\n";
 		$j = $j+30;
 		if ($j >= 60) {
 			$j = "0";

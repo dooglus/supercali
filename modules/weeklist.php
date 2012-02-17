@@ -23,7 +23,7 @@ http://supercali.inforest.com/
 */
 
 function showWeek() {
-	global $title, $niceday, $start_time, $end_time, $venue, $city, $state, $cat, $color, $background, $ed, $usr, $o, $c, $m, $a, $y, $w, $lang,$startnice;
+	global $title, $niceday, $start_time, $end_time, $venue, $city, $state, $cat, $color, $background, $css, $ed, $usr, $o, $c, $m, $a, $y, $w, $lang,$startnice;
 	ksort($start_time);
 	$curdate = "";
 	while (list($date,$val) = each($start_time)) {
@@ -35,15 +35,17 @@ function showWeek() {
 		while (list($t) = each($start_time[$date])) {
 			while (list($id,$value) = each($start_time[$date][$t])) {
 				echo "<li>";
-				echo "<div class=\"item\"";
-				if ($color[$id]) echo " style=\"color: ".$color[$id]."; background: ".$background[$id].";\"";
-				echo ">";
+				echo "<div class=\"item\" style=\"";
+				if ($color[$id]) echo "color: ".$color[$id]."; background: ".$background[$id]."; ";
+				if ($css[$id]) echo $css[$id];
+				echo "\">";
 				echo "<div class=\"time\">".$value;
 				if ($end_time[$date][$t][$id]) echo " - ".$end_time[$date][$t][$id];
 				echo "</div>\n";
-				echo "<div class=\"title\"><a href=\"show_event.php?id=".$id."&o=".$o."&c=".$c."&m=".$m."&a=".$a."&y=".$y."&w=".$w."\" onClick=\"openPic('show_event.php?id=".$id."&size=small','pop','600','400'); window.newWindow.focus(); return false\"";
-				if ($color[$id]) echo " style=\"color: ".$color[$id]."; background: ".$background[$id].";\"";
-				echo ">".$title[$id]."</a></div>\n";
+				echo "<div class=\"title\"><a href=\"show_event.php?id=".$id."&o=".$o."&c=".$c."&m=".$m."&a=".$a."&y=".$y."&w=".$w."\" onClick=\"openPic('show_event.php?id=".$id."&size=small','pop','600','400'); window.newWindow.focus(); return false\" style=\"";
+				if ($color[$id]) echo "color: ".$color[$id]."; background: ".$background[$id]."; ";
+				if ($css[$id]) echo $css[$id];
+				echo "\">".$title[$id]."</a></div>\n";
 				if ($venue[$id]) {
 					echo "<div class=\"venue\">".$venue[$id]."</div>\n";
 					if ($city[$id]) {

@@ -30,7 +30,7 @@ http://supercali.inforest.com/
 function grabDates($start,$end,$category_array) {
 	$cats = implode(",",$category_array);
 	global $table_prefix, $supergroup;
-	global $title, $niceday, $start_time, $end_time, $venue, $city, $state, $cat,$ed, $usr, $color, $background,$lang, $w, $ap, $status;
+	global $title, $niceday, $start_time, $end_time, $venue, $city, $state, $cat,$ed, $usr, $color, $background, $css, $lang, $w, $ap, $status;
 	/* get applicable events */
 	$superedit = false;
 	if (!$supergroup) {
@@ -48,24 +48,24 @@ function grabDates($start,$end,$category_array) {
 	if (($mod > 0) || ($superedit)) {
 		$q = "
 			SELECT
-				DATE_FORMAT({$table_prefix}dates.date, '%Y%m%d'),
-				DATE_FORMAT({$table_prefix}dates.date, '%H%i'),
-				{$table_prefix}events.event_id,
-				{$table_prefix}events.title,
-				DATE_FORMAT({$table_prefix}dates.date, '%W, %M %e, %Y'),
+				DATE_FORMAT({$table_prefix}dates.date, '%Y%m%d')                 as short_date,    " . /*  0 */ "
+				{$table_prefix}events.event_id                                   as event_id,      " . /*  2 */ "
+				{$table_prefix}events.title                                      as title,         " . /*  3 */ "
+				DATE_FORMAT({$table_prefix}dates.date, '%W, %M %e, %Y')          as day_view_date, " . /*  4 */ "
 				CONCAT(DATE_FORMAT({$table_prefix}dates.date, '%l:%i'),
-				       LOWER(DATE_FORMAT({$table_prefix}dates.date, '%p'))),
+				       LOWER(DATE_FORMAT({$table_prefix}dates.date, '%p')))      as another_time,  " . /*  5 */ "
 				CONCAT(DATE_FORMAT({$table_prefix}dates.end_date, '%l:%i'),
-				       LOWER(DATE_FORMAT({$table_prefix}dates.end_date, '%p'))),
-				{$table_prefix}links.company,
-				{$table_prefix}links.city,
-				{$table_prefix}links.state,
-				{$table_prefix}events.category_id,
-				{$table_prefix}events.user_id,
-				{$table_prefix}dates.date,
-				{$table_prefix}categories.color,
-				{$table_prefix}categories.background,
-				{$table_prefix}events.status_id
+				       LOWER(DATE_FORMAT({$table_prefix}dates.end_date, '%p')))  as end_time,      " . /*  6 */ "
+				{$table_prefix}links.company                                     as company,       " . /*  7 */ "
+				{$table_prefix}links.city                                        as city,          " . /*  8 */ "
+				{$table_prefix}links.state                                       as state,         " . /*  9 */ "
+				{$table_prefix}events.category_id                                as category_id,   " . /* 10 */ "
+				{$table_prefix}events.user_id                                    as user_id,       " . /* 11 */ "
+				{$table_prefix}dates.date                                        as date,          " . /* 12 */ "
+				{$table_prefix}categories.color                                  as color,         " . /* 13 */ "
+				{$table_prefix}categories.background                             as background,    " . /* 14 */ "
+				{$table_prefix}categories.css                                    as css,           " . /* 15 */ "
+				{$table_prefix}events.status_id                                  as status_id      " . /* 16 */ "
 			FROM
 				{$table_prefix}events,
 				{$table_prefix}dates,
@@ -86,50 +86,59 @@ function grabDates($start,$end,$category_array) {
 		";
 		$query = mysql_query($q);
 		//echo $q."<br>";
-		while ($row = mysql_fetch_row($query)) {
+		while ($row = mysql_fetch_assoc($query)) {
 			$edit = false;
-			if ($row[11] == $_SESSION["user_id"]) {
+			if ($row['user_id'] == $_SESSION["user_id"]) {
 				$edit = true;
 			} elseif ($superedit) {
 				$edit = true;
 			}
-			if ($edit==true) $ed[$row[2]]=true;
-			if ($superedit==true) $ap[$row[2]]=true;
-			$title[$row[2]]=strip_tags($row[3]);
-			$niceday[$row[0]][$row[12]][$row[2]]=$row[4];
-			if (($row[5] == "12:00 AM") && ($row[6] == "11:59 PM")) {
-				$start_time[$row[0]][$row[12]][$row[2]]=$lang["all_day"];
-			} elseif (($row[5] == "12:00 AM") && ($row[6] == "12:00 AM")) {
-				$start_time[$row[0]][$row[12]][$row[2]]=$lang["tba"];
-			} else {	
-				$start_time[$row[0]][$row[12]][$row[2]]=$row[5];
-				if ($row[6]) $end_time[$row[0]][$row[12]][$row[2]]=$row[6];
+			if ($edit==true) $ed[$row['event_id']]=true;
+			if ($superedit==true) $ap[$row['event_id']]=true;
+			$title[$row['event_id']]=strip_tags($row['title']);
+			$niceday[$row['short_date']][$row['date']][$row['event_id']]=$row['day_view_date'];
+			if (($row['another_time'] == "12:00 AM") && ($row['end_time'] == "11:59 PM")) {
+				$start_time[$row['short_date']][$row['date']][$row['event_id']]=$lang["all_day"];
+			} elseif (($row['another_time'] == "12:00 AM") && ($row['end_time'] == "12:00 AM")) {
+				$start_time[$row['short_date']][$row['date']][$row['event_id']]=$lang["tba"];
+			} else {
+				$start_time[$row['short_date']][$row['date']][$row['event_id']]=$row['another_time'];
+				if ($row['end_time']) $end_time[$row['short_date']][$row['date']][$row['event_id']]=$row['end_time'];
 			}
-			if ($row[7]) $venue[$row[2]]=$row[7];
-			if ($row[7] && $row[8]) $city[$row[2]]=$row[8];
-			if ($row[7] && $row[8] && $row[9]) $state[$row[2]]=$row[9];
-			$cat[$row[2]]=$row[10];
-			$usr[$row[2]]=$row[11];
+			if ($row['company']) $venue[$row['event_id']]=$row['company'];
+			if ($row['company'] && $row['city']) $city[$row['event_id']]=$row['city'];
+			if ($row['company'] && $row['city'] && $row['state']) $state[$row['event_id']]=$row['state'];
+			$cat[$row['event_id']]=$row['category_id'];
+			$usr[$row['event_id']]=$row['user_id'];
 
-			$cat_id = $row[10];
-			$mycolor = $row[13];
+			$cat_id = $row['category_id'];
+			$mycolor = $row['color'];
 			while ($mycolor == '') {
 			   $cat_id = mysql_result(mysql_query("select sub_of from {$table_prefix}categories where category_id = ".$cat_id),0,0);
 			   if ($cat_id == "0") break;
 			   $mycolor = mysql_result(mysql_query("select color from {$table_prefix}categories where category_id = ".$cat_id),0,0);
 			}
 
-			$cat_id = $row[10];
-			$mybg = $row[14];
+			$cat_id = $row['category_id'];
+			$mybg = $row['background'];
 			while ($mybg == '') {
 			   $cat_id = mysql_result(mysql_query("select sub_of from {$table_prefix}categories where category_id = ".$cat_id),0,0);
 			   if ($cat_id == "0") break;
 			   $mybg = mysql_result(mysql_query("select background from {$table_prefix}categories where category_id = ".$cat_id),0,0);
 			}
 
-			$color[$row[2]]=$mycolor;
-			$background[$row[2]]=$mybg;
-			$status[$row[2]]=$row[15];
+			$cat_id = $row['category_id'];
+			$mycss = $row['css'];
+			while ($mycss == '') {
+			   $cat_id = mysql_result(mysql_query("select sub_of from {$table_prefix}categories where category_id = ".$cat_id),0,0);
+			   if ($cat_id == "0") break;
+			   $mycss = mysql_result(mysql_query("select css from {$table_prefix}categories where category_id = ".$cat_id),0,0);
+			}
+
+			$color[$row['event_id']]=$mycolor;
+			$background[$row['event_id']]=$mybg;
+			$css[$row['event_id']]=$mycss;
+			$status[$row['event_id']]=$row['status_id'];
 		}
 	}
 }
@@ -154,7 +163,7 @@ function grab($start,$end,$category) {
 			if (mysql_num_rows($query) > 0) {
 				while ($row = mysql_fetch_row($query)) {
 					$category_permissions[] = $row[0];
-					
+
 				}
 			}
 			if (in_array($category,$category_permissions)) $canview = true;
@@ -166,9 +175,9 @@ function grab($start,$end,$category) {
 			if ($include_child_categories) grab_child($start,$end,$category,true);
 			if ($include_parent_categories) grab_parent($start,$end,$category,true);
 			grabDates($start,$end,$category_array);
-			
+
 		}
-	
+
 	}
 }
 
@@ -208,7 +217,7 @@ function grab_parent($start,$end,$category,$starter=false) {
 	}
 	if ($canview) {
 		if (!$starter) $category_array[] = $category;
-		
+
 		$q = "select sub_of from {$table_prefix}categories where category_id = ".$category;
 		//echo $q."<br>";
 		$query = mysql_query($q);
@@ -234,9 +243,9 @@ if (!$superview) {
 
 if (($supergroup) && ($supercategory)) {
 	$canview = true;
-	
+
 } else {
-	
+
 	if (!$supercategory) {
 		$canview = false;
 		$q = "select * from {$table_prefix}users_to_categories where category_id = ".$c." and user_id = ".$_SESSION["user_id"];
@@ -244,11 +253,11 @@ if (($supergroup) && ($supercategory)) {
 		$qu = mysql_query($q);
 		if (mysql_num_rows($qu) > 0) {
 			$canview = true;
-			
+
 		} else {
 			$msg .= "<p>".$lang["no_permission_to_view_category"]."</p>";
 			$canview = false;
-			
+
 		}
 	}
 	if ((!$supergroup) && $canview) {
@@ -257,11 +266,11 @@ if (($supergroup) && ($supercategory)) {
 		$qu = mysql_query($q);
 		if (mysql_num_rows($qu) > 0) {
 			$canview = true;
-			
+
 		} else {
 			$msg .= "<p>".$lang["no_permission_to_view_group"]."</p>";
 			$canview = false;
-			
+
 		}
 	}
 }

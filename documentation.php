@@ -133,7 +133,7 @@ if (!$_SESSION["user_id"]) {
 
 <p>In addition to entering a category name, you can select which category your new category is going to be a subcategory.  Again, all additional categories need to be a subcategory of the default, parent category, but there are no limits to how many levels of subcategories can be created.  Its also possible to rearrange the nesting of your categories in the future without loosing any event data.  The order in which categories of the same generation are displayed is determined by the Sequence field.</p>
 
-<p>Optional fields are the Text Color and Background fields.  You can pick the colors that will determine the foreground and background of those events listed in the category.  Currently, the Description field is not used but is likely to be utilized in future display modules.</p>
+<p>Optional fields are the Text Color, Background, and CSS fields.  You can pick the colors that will determine the foreground and background of those events listed in the category, or specify general CSS code for those events (for example, 'font-style: italic;').  Currently, the Description field is not used but is likely to be utilized in future display modules.</p>
 
 <h4>Groups</h4>
 

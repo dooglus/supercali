@@ -115,7 +115,7 @@ function editCategory($id) {
 <input type="hidden" name="id" id="id" value="<?php echo $cat["category_id"]; ?>">
 <table>
 	<tr>
-		<td colspan="2"><?php echo $lang["category_name"]; ?>: <input type="text" name="name" value="<?php echo $cat["name"]; ?>" size="20" maxlength="40" style="color: <?php echo $cat["color"]; ?>; background-color: <?php echo $cat["background"]; ?>;".></td>
+		<td colspan="2"><?php echo $lang["category_name"]; ?>: <input type="text" name="name" value="<?php echo $cat["name"]; ?>" size="20" maxlength="40" style="color: <?php echo $cat["color"]; ?>; background-color: <?php echo $cat["background"] . ";" . $cat["css"]; ?>".></td>
 	</tr>
 	<tr><td><?php echo $lang["parent_category"]; ?>: 
 		<select name="sub_of" id="sub_of">
@@ -124,9 +124,11 @@ function editCategory($id) {
 		</td>
 		<td><?php echo $lang["sequence"]; ?>: <input type="text" name="sequence" value="<?php echo $cat["sequence"]; ?>" size="2" maxlength="2"></td>
 	</tr>
-	<tr><td><?php echo $lang["text_color"]; ?>:  <input type="text" name="color" value="<?php echo $cat["color"]; ?>" size="10" maxlength="30" onChange="this.form.name.style.color=this.value;"> <A HREF="#" onClick="cp.select(cate.color,'pick');return false;" NAME="pick" ID="pick">Pick</A>
-		</td>
-		<td><?php echo $lang["background"]; ?>: <input type="text" name="background" value="<?php echo $cat["background"]; ?>" size="10" maxlength="255" onChange="this.form.name.style.background=this.value;">  <A HREF="#" onClick="cp.select(cate.background,'pick2');return false;" NAME="pick2" ID="pick2">Pick</A></td>
+	<tr><td><?php echo $lang["text_color"]; ?>:  <input type="text" name="color" value="<?php echo $cat["color"]; ?>" size="10" maxlength="30" onChange="this.form.name.style.color=this.value;"> <A HREF="#" onClick="cp.select(cate.color,'pick');return false;" NAME="pick" ID="pick">Pick</A></td>
+	    <td><?php echo $lang["background"]; ?>: <input type="text" name="background" value="<?php echo $cat["background"]; ?>" size="10" maxlength="255" onChange="this.form.name.style.background=this.value;">  <A HREF="#" onClick="cp.select(cate.background,'pick2');return false;" NAME="pick2" ID="pick2">Pick</A></td>
+	</tr>
+	<tr><td colspan="2"><?php echo $lang["css"]; ?>:<br />
+        <input type="text" size="80" name="css" value="<?php echo $cat["css"]; ?>" size="10" maxlength="255" onChange="this.form.name.style.css=this.value;"></td>
 	</tr>
 	<tr>
 		<td colspan="2"><?php echo $lang["description"]; ?>:<br />

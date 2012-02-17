@@ -106,6 +106,7 @@ if ($_POST["mode"] == "Install") {
 						  description text,
 						  color varchar(30) default NULL,
   						  background varchar(255) NULL default '',
+  						  css varchar(255) NULL default '',
 						  
 						  PRIMARY KEY  (category_id)
 						)");

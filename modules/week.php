@@ -33,6 +33,8 @@ showHours();
 echo "<td><table class=\"day\"><tr>";
 
 for ($we=0;$we<7;$we++) {
+	if ($page_title != "Week" && ($we == 5 || $we == 6))
+        	continue;
 	echo "<td width=\"14%\" class=\"single_day\">\n";
 	showDay($now["week"]["y"][$we],$now["week"]["m"][$we],$now["week"]["a"][$we]);
 	echo "</td>";

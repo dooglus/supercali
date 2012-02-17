@@ -265,6 +265,8 @@ table.grid td.holder {
     overflow-y: hidden;    /* changed from auto because I didn't want the scroll bar */
     overflow-x: hidden;    /* added to allow IE to size the width of the event properly */
     margin: 0px;
+}
+.inner {
     cursor: pointer;
 }
 .wrap{

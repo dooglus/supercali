@@ -15,13 +15,14 @@ Quarter View - Created by Chris McDonald
 */
 
 function showGrid($date) {
-	global $title, $niceday, $start_time, $end_time, $venue, $city, $state, $cat, $color, $background, $ed, $usr, $o, $c, $m, $a, $y, $w, $lang;
+	global $title, $niceday, $start_time, $end_time, $venue, $city, $state, $cat, $color, $background, $css, $ed, $usr, $o, $c, $m, $a, $y, $w, $lang;
 	if ($start_time[$date]) {
 		ksort($start_time[$date]);
 		while (list($t) = each($start_time[$date])) {
 			while (list($id,$value) = each($start_time[$date][$t])) {
 				echo "<div class=\"button\" style=\"";
-				if ($color[$id]) echo " color: ".$color[$id]."; background: ".$background[$id].";";
+				if ($color[$id]) echo " color: ".$color[$id]."; background: ".$background[$id]."; ";
+				if ($css[$id]) $css[$id];
 				echo "\">";
 				echo "<a href=\"show_event.php?id=".$id."&o=".$o."&c=".$c."&m=".$m."&a=".$a."&y=".$y."&w=".$w."\" onClick=\"openPic('show_event.php?id=".$id."&size=small','pop','600','400'); window.newWindow.focus(); return false\">";
 				echo "<div style=\"background: ".$color[$id].";\" title=\"";

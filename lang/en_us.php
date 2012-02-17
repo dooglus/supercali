@@ -155,6 +155,7 @@ $lang["parent_category"] = "Parent Category";
 $lang["sequence"] = "Sequence";
 $lang["text_color"] = "Text Color";
 $lang["background"] = "Background";
+$lang["css"] = "CSS";
 $lang["not_authorized_edit_categories"] = "You are not authorized to edit categories.";
 
 // edit_links.php

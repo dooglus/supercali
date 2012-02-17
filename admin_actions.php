@@ -179,6 +179,7 @@ function addCategory() {
 			$description = mysql_real_escape_string(stripslashes($_POST["description"]));
 			$color = mysql_real_escape_string(stripslashes($_POST["color"]));
 			$background = mysql_real_escape_string(stripslashes($_POST["background"]));
+			$css = mysql_real_escape_string(stripslashes($_POST["css"]));
         } else {
           	$name = mysql_real_escape_string($_POST["name"]);
 			$sub_of = mysql_real_escape_string($_POST["sub_of"]);
@@ -186,8 +187,9 @@ function addCategory() {
 			$description = mysql_real_escape_string($_POST["description"]);
 			$color = mysql_real_escape_string($_POST["color"]);
 			$background = mysql_real_escape_string($_POST["background"]);
+			$css = mysql_real_escape_string($_POST["css"]);
         }
-		$q = "INSERT INTO ".$table_prefix."categories (name, sub_of, sequence, description, color, background) values ('".$name."', '".$sub_of."', '".$sequence."', '".$description."', '".$color."', '".$background."')";
+		$q = "INSERT INTO ".$table_prefix."categories (name, sub_of, sequence, description, color, background, css) values ('".$name."', '".$sub_of."', '".$sequence."', '".$description."', '".$color."', '".$background."', '".$css."')";
 		$query = mysql_query($q);
 		if (!$query) $msg = $lang["database_error_category_not_updated"];
 		else {
@@ -212,6 +214,7 @@ function editCategory($id) {
 			$description = mysql_real_escape_string(stripslashes($_POST["description"]));
 			$color = mysql_real_escape_string(stripslashes($_POST["color"]));
 			$background = mysql_real_escape_string(stripslashes($_POST["background"]));
+			$css = mysql_real_escape_string(stripslashes($_POST["css"]));
         } else {
           	$name = mysql_real_escape_string($_POST["name"]);
 			$sub_of = mysql_real_escape_string($_POST["sub_of"]);
@@ -219,8 +222,9 @@ function editCategory($id) {
 			$description = mysql_real_escape_string($_POST["description"]);
 			$color = mysql_real_escape_string($_POST["color"]);
 			$background = mysql_real_escape_string($_POST["background"]);
+			$css = mysql_real_escape_string($_POST["css"]);
         }
-		$query = mysql_query("UPDATE ".$table_prefix."categories set name = '".$name."', sub_of = '".$sub_of."', sequence = '".$sequence."', description = '".$description."', color = '".$color."', background = '".$background."' where category_id =".$id);
+		$query = mysql_query("UPDATE ".$table_prefix."categories set name = '".$name."', sub_of = '".$sub_of."', sequence = '".$sequence."', description = '".$description."', color = '".$color."', background = '".$background."', css = '".$css."' where category_id =".$id);
 		if (!$query) $msg = $lang["database_error_category_not_updated"];
 		else $msg = $lang["category_updated"];
 	}
